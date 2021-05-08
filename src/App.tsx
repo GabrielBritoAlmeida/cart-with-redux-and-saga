@@ -1,18 +1,12 @@
-import { Button } from 'components/Button'
-
-import styles from 'home.module.css'
+import { GlobalStyles } from 'global'
+import { Home } from 'pages/home'
 
 const App: React.FC = () => {
   return (
-    <div className={styles.wrapper}>
-      <div>
-        <Button>Lista de produtos</Button>
-      </div>
-
-      <div>
-        <Button>Carrinho</Button>
-      </div>
-    </div>
+    <>
+      <Home />
+      <GlobalStyles />
+    </>
   )
 }
 
