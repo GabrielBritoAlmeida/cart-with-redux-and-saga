@@ -1,4 +1,4 @@
-import { ActionTypes } from './types'
+import { ActionTypes, IProduct } from './types'
 
 export function listProductsRequest() {
   return {
@@ -6,9 +6,12 @@ export function listProductsRequest() {
   }
 }
 
-export function listProductsSuccess() {
+export function listProductsSuccess(list: IProduct[]) {
   return {
-    type: ActionTypes.listProductsSuccess
+    type: ActionTypes.listProductsSuccess,
+    payload: {
+      list
+    }
   }
 }
 

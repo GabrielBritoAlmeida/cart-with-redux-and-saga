@@ -4,13 +4,13 @@ export enum ActionTypes {
   listProductsSuccess = 'LIST_PRODUCTS_SUCCESS'
 }
 
-export interface IProduct {
+export type IProduct = {
   id: number
   name: string
   price: number
 }
 
-export interface IListProductsState {
+export type IListProductsState = {
   items: IProduct[]
   failure: boolean
   loading: boolean

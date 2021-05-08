@@ -3,17 +3,14 @@ import { listProductsFailure, listProductsSuccess } from './action'
 
 import { api } from 'services/api'
 import { AxiosResponse } from 'axios'
-import { ActionTypes, IListProductsState } from './types'
+import { ActionTypes, IProduct } from './types'
 
 function* listProductsSaga() {
   try {
-    const response: AxiosResponse<IListProductsState> = yield call(
-      api.get,
-      'products'
-    )
+    const response: AxiosResponse<IProduct[]> = yield call(api.get, 'products')
 
-    if (response.data.items) {
-      yield put(listProductsSuccess())
+    if (response.status === 200) {
+      yield put(listProductsSuccess(response.data))
     }
   } catch (error) {
     yield listProductsFailure()

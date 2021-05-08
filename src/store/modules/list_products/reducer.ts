@@ -17,7 +17,8 @@ const Cart: Reducer<IListProductsState> = (state = INITIAL_STATE, action) => {
       }
 
       case ActionTypes.listProductsSuccess: {
-        draft.items.push(action.payload)
+        const { list } = action.payload
+        draft.items = list
         draft.loading = false
         break
       }

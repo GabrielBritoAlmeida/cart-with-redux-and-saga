@@ -1,26 +1,40 @@
 import { Button } from 'components/Button'
+import { useEffect, useMemo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { listProductsRequest } from 'store/modules/list_products/action'
+import { IProduct } from 'store/modules/list_products/types'
+import { IState } from 'store'
 
 import * as S from './styles'
 
 export const Home: React.FC = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(listProductsRequest())
+  }, [dispatch])
+
+  const list = useSelector<IState, IProduct[]>(
+    (state) => state.listProducts.items
+  )
+
+  const listProductsElements = useMemo(() => {
+    return list.map((item) => (
+      <S.Product key={item.id}>
+        <Button>{item.name}</Button>
+        <Button>{item.price}</Button>
+        <Button>+ Buy</Button>
+        <Button>- Remove</Button>
+      </S.Product>
+    ))
+  }, [list])
+
   return (
     <S.Wrapper>
       <S.Container>
         <S.SectionProducts>
           <S.Title>Lista de Produtos</S.Title>
-          <S.Product>
-            <Button>Produto 1</Button>
-            <Button>R$99,90</Button>
-            <Button>+ Buy</Button>
-            <Button>- Remove</Button>
-          </S.Product>
-
-          <S.Product>
-            <Button>Produto 2</Button>
-            <Button>R$99,90</Button>
-            <Button>+ Buy</Button>
-            <Button>- Remove</Button>
-          </S.Product>
+          {listProductsElements}
         </S.SectionProducts>
 
         <S.Cart>
