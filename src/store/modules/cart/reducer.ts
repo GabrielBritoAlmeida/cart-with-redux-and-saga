@@ -35,6 +35,16 @@ const Cart: Reducer<ICartState> = (state = INITIAL_STATE, action) => {
         break
       }
 
+      case ActionTypes.deleteProductCartRequest: {
+        const { id } = action.payload
+
+        const productDeleteInCartIndex = draft.items.filter(
+          (item) => item.product.id !== id
+        )
+        draft.items = productDeleteInCartIndex
+        break
+      }
+
       default: {
         return state
       }

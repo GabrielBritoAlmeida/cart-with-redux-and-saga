@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { listProductsRequest } from 'store/modules/list_products/action'
 import { IProduct } from 'store/modules/list_products/types'
 import { ICartItem } from 'store/modules/cart/types'
-import { addProductToCartRequest } from 'store/modules/cart/action'
+import {
+  addProductToCartRequest,
+  deleteProductToCartRequest
+} from 'store/modules/cart/action'
 import { IState } from 'store'
 
 import * as S from './styles'
@@ -27,6 +30,13 @@ export const Home: React.FC = () => {
     [dispatch]
   )
 
+  const handleDeleteFromCart = useCallback(
+    (id: number) => {
+      dispatch(deleteProductToCartRequest(id))
+    },
+    [dispatch]
+  )
+
   const cartList = useSelector<IState, ICartItem[]>((state) => state.cart.items)
 
   const lisCartElements = useMemo(() => {
@@ -34,10 +44,10 @@ export const Home: React.FC = () => {
       <S.ProductCart key={item.product.id}>
         <Button>{item.product.name}</Button>
         <Button>{item.quantity}</Button>
-        <Button>x</Button>
+        <Button onClick={() => handleDeleteFromCart(item.product.id)}>x</Button>
       </S.ProductCart>
     ))
-  }, [cartList])
+  }, [cartList, handleDeleteFromCart])
 
   const listProductsElements = useMemo(() => {
     return list.map((item) => (

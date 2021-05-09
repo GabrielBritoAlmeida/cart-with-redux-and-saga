@@ -26,3 +26,12 @@ export function addProductToCartFailure(productId: number) {
     }
   }
 }
+
+export function deleteProductToCartRequest(id: number) {
+  return {
+    type: ActionTypes.deleteProductCartRequest,
+    payload: {
+      id
+    }
+  }
+}
