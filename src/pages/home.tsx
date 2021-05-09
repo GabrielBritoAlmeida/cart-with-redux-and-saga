@@ -10,6 +10,7 @@ import {
   deleteProductCartRequest
 } from 'store/modules/cart/action'
 import { IState } from 'store'
+import { formatPrice } from 'util/format'
 
 import * as S from './styles'
 
@@ -47,6 +48,12 @@ export const Home: React.FC = () => {
 
   const cartList = useSelector<IState, ICartItem[]>((state) => state.cart.items)
 
+  const handleCalcTotalPrice = formatPrice(
+    cartList.reduce((sumTotal, item) => {
+      return sumTotal + item.product.price * item.quantity
+    }, 0)
+  )
+
   const lisCartElements = useMemo(() => {
     return cartList.map((item) => (
       <S.ProductCart key={item.product.id}>
@@ -61,7 +68,7 @@ export const Home: React.FC = () => {
     return list.map((item) => (
       <S.Product key={item.id}>
         <Button>{item.name}</Button>
-        <Button>{item.price}</Button>
+        <Button>{formatPrice(item.price)}</Button>
         <Button onClick={() => handleAddToCart(item)}>+ Buy</Button>
         <Button onClick={() => handleRemoveToCart(item)}>- Remove</Button>
       </S.Product>
@@ -84,7 +91,9 @@ export const Home: React.FC = () => {
 
       <S.Footer>
         <Button>Adicionar novo produto</Button>
-        <Button style={{ marginLeft: 16 }}>Valor total: R$499,30</Button>
+        <Button style={{ marginLeft: 16 }}>
+          Valor total: {handleCalcTotalPrice}
+        </Button>
       </S.Footer>
     </S.Wrapper>
   )

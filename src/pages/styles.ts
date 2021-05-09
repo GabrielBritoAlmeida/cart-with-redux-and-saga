@@ -34,7 +34,7 @@ export const Cart = styled.section`
 
 export const Footer = styled.footer`
   display: grid;
-  grid-template-columns: 60% 40%;
+  grid-template-columns: 60% 39%;
   margin-top: 16px;
 `
 
