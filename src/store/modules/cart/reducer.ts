@@ -35,7 +35,30 @@ const Cart: Reducer<ICartState> = (state = INITIAL_STATE, action) => {
         break
       }
 
-      case ActionTypes.deleteProductCartRequest: {
+      case ActionTypes.removeProductToCartSuccess: {
+        const { product } = action.payload
+
+        const productInCartIndex = draft.items.findIndex(
+          (item) => item.product.id === product.id
+        )
+
+        if (productInCartIndex >= 0) {
+          if (draft.items[productInCartIndex].quantity > 1) {
+            draft.items[productInCartIndex].quantity--
+          } else {
+            draft.items.splice(productInCartIndex, 1)
+          }
+        }
+        break
+      }
+
+      case ActionTypes.removeProductToCartFailure: {
+        const { productId } = action.payload
+        draft.failedStockCheck.push(productId)
+        break
+      }
+
+      case ActionTypes.deleteProductCartSuccess: {
         const { id } = action.payload
 
         const productDeleteInCartIndex = draft.items.filter(

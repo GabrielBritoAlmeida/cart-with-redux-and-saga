@@ -6,6 +6,7 @@ import { IProduct } from 'store/modules/list_products/types'
 import { ICartItem } from 'store/modules/cart/types'
 import {
   addProductToCartRequest,
+  removeProductToCartRequest,
   deleteProductCartRequest
 } from 'store/modules/cart/action'
 import { IState } from 'store'
@@ -26,6 +27,13 @@ export const Home: React.FC = () => {
   const handleAddToCart = useCallback(
     (product: IProduct) => {
       dispatch(addProductToCartRequest(product))
+    },
+    [dispatch]
+  )
+
+  const handleRemoveToCart = useCallback(
+    (product: IProduct) => {
+      dispatch(removeProductToCartRequest(product))
     },
     [dispatch]
   )
@@ -55,10 +63,10 @@ export const Home: React.FC = () => {
         <Button>{item.name}</Button>
         <Button>{item.price}</Button>
         <Button onClick={() => handleAddToCart(item)}>+ Buy</Button>
-        <Button>- Remove</Button>
+        <Button onClick={() => handleRemoveToCart(item)}>- Remove</Button>
       </S.Product>
     ))
-  }, [list, handleAddToCart])
+  }, [list, handleAddToCart, handleRemoveToCart])
 
   return (
     <S.Wrapper>

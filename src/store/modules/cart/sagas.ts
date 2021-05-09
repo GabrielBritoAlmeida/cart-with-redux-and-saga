@@ -4,8 +4,9 @@ import {
   addProductToCartRequest,
   addProductToCartSuccess,
   deleteProductCartRequest,
-  deleteProductCartSuccess,
-  deleteProductCartFailure
+  removeProductToCartSuccess,
+  removeProductToCartFailure,
+  deleteProductCartSuccess
 } from './action'
 
 import { api } from 'services/api'
@@ -31,18 +32,27 @@ function* ProductStockSaga({ payload }: ProductStockSagaRequest) {
   }
 }
 
+function* RemoveProductStockSaga({ payload }: ProductStockSagaRequest) {
+  const { product } = payload
+  try {
+    yield put(removeProductToCartSuccess(product))
+  } catch (error) {
+    yield put(removeProductToCartFailure(product.id))
+  }
+}
+
 function* DeleteProductStockSaga({ payload }: DeleteProduct) {
   try {
     const { id } = payload
     yield put(deleteProductCartSuccess(id))
     alert(`Produto deletado com sucesso!`)
   } catch (error) {
-    yield put(deleteProductCartFailure())
     alert(`Erro ao deletar o item!`)
   }
 }
 
 export default all([
   takeLatest(ActionTypes.addProductToCartRequest, ProductStockSaga),
+  takeLatest(ActionTypes.removeProductToCartRequest, RemoveProductStockSaga),
   takeLatest(ActionTypes.deleteProductCartRequest, DeleteProductStockSaga)
 ])
