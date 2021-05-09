@@ -1,8 +1,10 @@
 import { Button } from 'components/Button'
-import { useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { listProductsRequest } from 'store/modules/list_products/action'
 import { IProduct } from 'store/modules/list_products/types'
+import { ICartItem } from 'store/modules/cart/types'
+import { addProductToCartRequest } from 'store/modules/cart/action'
 import { IState } from 'store'
 
 import * as S from './styles'
@@ -18,16 +20,35 @@ export const Home: React.FC = () => {
     (state) => state.listProducts.items
   )
 
+  const handleAddToCart = useCallback(
+    (product: IProduct) => {
+      dispatch(addProductToCartRequest(product))
+    },
+    [dispatch]
+  )
+
+  const cartList = useSelector<IState, ICartItem[]>((state) => state.cart.items)
+
+  const lisCartElements = useMemo(() => {
+    return cartList.map((item) => (
+      <S.ProductCart key={item.product.id}>
+        <Button>{item.product.name}</Button>
+        <Button>{item.quantity}</Button>
+        <Button>x</Button>
+      </S.ProductCart>
+    ))
+  }, [cartList])
+
   const listProductsElements = useMemo(() => {
     return list.map((item) => (
       <S.Product key={item.id}>
         <Button>{item.name}</Button>
         <Button>{item.price}</Button>
-        <Button>+ Buy</Button>
+        <Button onClick={() => handleAddToCart(item)}>+ Buy</Button>
         <Button>- Remove</Button>
       </S.Product>
     ))
-  }, [list])
+  }, [list, handleAddToCart])
 
   return (
     <S.Wrapper>
@@ -39,18 +60,7 @@ export const Home: React.FC = () => {
 
         <S.Cart>
           <S.Title>Carrinho</S.Title>
-
-          <S.ProductCart>
-            <Button>Produto 1</Button>
-            <Button>2</Button>
-            <Button>x</Button>
-          </S.ProductCart>
-
-          <S.ProductCart>
-            <Button>Produto 2</Button>
-            <Button>5</Button>
-            <Button>x</Button>
-          </S.ProductCart>
+          {lisCartElements}
         </S.Cart>
       </S.Container>
 
