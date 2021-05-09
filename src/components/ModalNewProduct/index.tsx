@@ -1,5 +1,9 @@
 import { useState } from 'react'
 import Modal from 'react-modal'
+import { useDispatch } from 'react-redux'
+import { newProductsRequest } from 'store/modules/new_product/action'
+import { listProductsRequest } from 'store/modules/list_products/action'
+import { INewProduct } from 'store/modules/new_product/types'
 
 type ModalNewProductProps = {
   modalIsOpen: boolean
@@ -25,11 +29,21 @@ export function ModalNewProduct({
 }: ModalNewProductProps) {
   const [nameProduct, setNameProduct] = useState('')
   const [priceProduct, setPriceProduct] = useState('')
+  const dispatch = useDispatch()
 
   function handleSubmit() {
     if (!nameProduct || !priceProduct) {
       alert('Verifiquei os campos nome e valor do produto!')
     }
+
+    const newObj: INewProduct = {
+      name: nameProduct,
+      price: priceProduct
+    }
+
+    dispatch(newProductsRequest(newObj))
+    dispatch(listProductsRequest())
+    closeModal()
   }
 
   return (
