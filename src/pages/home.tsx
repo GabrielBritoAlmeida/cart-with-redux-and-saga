@@ -1,5 +1,5 @@
 import { Button } from 'components/Button'
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { listProductsRequest } from 'store/modules/list_products/action'
 import { IProduct } from 'store/modules/list_products/types'
@@ -10,11 +10,13 @@ import {
   deleteProductCartRequest
 } from 'store/modules/cart/action'
 import { IState } from 'store'
+import { ModalNewProduct } from 'components/ModalNewProduct'
 import { formatPrice } from 'util/format'
 
 import * as S from './styles'
 
 export const Home: React.FC = () => {
+  const [open, setOpen] = useState(true)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -90,11 +92,12 @@ export const Home: React.FC = () => {
       </S.Container>
 
       <S.Footer>
-        <Button>Adicionar novo produto</Button>
+        <Button onClick={() => setOpen(true)}>Adicionar novo produto</Button>
         <Button style={{ marginLeft: 16 }}>
           Valor total: {handleCalcTotalPrice}
         </Button>
       </S.Footer>
+      <ModalNewProduct modalIsOpen={open} closeModal={() => setOpen(false)} />
     </S.Wrapper>
   )
 }

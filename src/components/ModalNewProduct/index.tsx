@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Modal from 'react-modal'
 
 type ModalNewProductProps = {
@@ -16,10 +17,21 @@ const customStyles = {
   }
 }
 
+import * as S from './styles'
+
 export function ModalNewProduct({
   modalIsOpen,
   closeModal
 }: ModalNewProductProps) {
+  const [nameProduct, setNameProduct] = useState('')
+  const [priceProduct, setPriceProduct] = useState('')
+
+  function handleSubmit() {
+    if (!nameProduct || !priceProduct) {
+      alert('Verifiquei os campos nome e valor do produto!')
+    }
+  }
+
   return (
     <Modal
       isOpen={modalIsOpen}
@@ -27,7 +39,33 @@ export function ModalNewProduct({
       style={customStyles}
       contentLabel="Example Modal"
     >
-      <h1>Modal</h1>
+      <S.FormModal>
+        <S.TitleModal>Adicionar novo produto</S.TitleModal>
+        <S.InputModal
+          required
+          type="text"
+          placeholder="Nome do produto"
+          value={nameProduct}
+          onChange={(e) => setNameProduct(e.target.value)}
+        />
+        <S.InputModal
+          required
+          type="number"
+          placeholder="100 valor em número"
+          pattern="[0-9]*{1,5}"
+          value={priceProduct}
+          onChange={(e) => setPriceProduct(e.target.value)}
+        />
+
+        <S.AlignButtonModal>
+          <S.ButtonModalCancel type="button" onClick={closeModal}>
+            Cancelar
+          </S.ButtonModalCancel>
+          <S.ButtonModalAdd type="button" onClick={handleSubmit}>
+            Adicionar Produto
+          </S.ButtonModalAdd>
+        </S.AlignButtonModal>
+      </S.FormModal>
     </Modal>
   )
 }
