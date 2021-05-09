@@ -6,7 +6,7 @@ import { IProduct } from 'store/modules/list_products/types'
 import { ICartItem } from 'store/modules/cart/types'
 import {
   addProductToCartRequest,
-  deleteProductToCartRequest
+  deleteProductCartRequest
 } from 'store/modules/cart/action'
 import { IState } from 'store'
 
@@ -32,7 +32,7 @@ export const Home: React.FC = () => {
 
   const handleDeleteFromCart = useCallback(
     (id: number) => {
-      dispatch(deleteProductToCartRequest(id))
+      dispatch(deleteProductCartRequest(id))
     },
     [dispatch]
   )

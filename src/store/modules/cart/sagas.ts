@@ -3,15 +3,17 @@ import {
   addProductToCartFailure,
   addProductToCartRequest,
   addProductToCartSuccess,
-  deleteProductToCartRequest
+  deleteProductCartRequest,
+  deleteProductCartSuccess,
+  deleteProductCartFailure
 } from './action'
 
 import { api } from 'services/api'
 import { AxiosResponse } from 'axios'
-import { ActionTypes, IProduct, ICartItem } from './types'
+import { ActionTypes, IProduct } from './types'
 
 type ProductStockSagaRequest = ReturnType<typeof addProductToCartRequest>
-type DeleteProduct = ReturnType<typeof deleteProductToCartRequest>
+type DeleteProduct = ReturnType<typeof deleteProductCartRequest>
 
 function* ProductStockSaga({ payload }: ProductStockSagaRequest) {
   const { product } = payload
@@ -30,17 +32,13 @@ function* ProductStockSaga({ payload }: ProductStockSagaRequest) {
 }
 
 function* DeleteProductStockSaga({ payload }: DeleteProduct) {
-  const { id } = payload
-
-  const availableStockResponse: AxiosResponse<ICartItem> = yield call(
-    api.delete,
-    `products/${id}`
-  )
-
-  if (availableStockResponse.status === 200) {
+  try {
+    const { id } = payload
+    yield put(deleteProductCartSuccess(id))
     alert(`Produto deletado com sucesso!`)
-  } else {
-    alert(`Erro ao deletar o produto!`)
+  } catch (error) {
+    yield put(deleteProductCartFailure())
+    alert(`Erro ao deletar o item!`)
   }
 }
 
