@@ -2,7 +2,6 @@ import { useState } from 'react'
 import Modal from 'react-modal'
 import { useDispatch } from 'react-redux'
 import { newProductsRequest } from 'store/modules/new_product/action'
-import { listProductsRequest } from 'store/modules/list_products/action'
 import { INewProduct } from 'store/modules/new_product/types'
 
 type ModalNewProductProps = {
@@ -42,7 +41,6 @@ export function ModalNewProduct({
     }
 
     dispatch(newProductsRequest(newObj))
-    dispatch(listProductsRequest())
     closeModal()
   }
 

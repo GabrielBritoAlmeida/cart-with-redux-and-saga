@@ -16,7 +16,7 @@ import { formatPrice } from 'util/format'
 import * as S from './styles'
 
 export const Home: React.FC = () => {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   const dispatch = useDispatch()
 
   useEffect(() => {
