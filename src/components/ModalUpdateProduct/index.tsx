@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Modal from 'react-modal'
 import { useDispatch } from 'react-redux'
 import { updateProductsRequest } from 'store/modules/update_product/action'
+import { deleteProductsRequest } from 'store/modules/delete_product/action'
 import { IUpdateProduct } from 'store/modules/update_product/types'
 
 type ModalNewProductProps = {
@@ -53,6 +54,14 @@ export function ModalUpdateProduct({
     closeModal()
   }
 
+  function handleDeleteItem() {
+    if (product?.id) {
+      const { id } = product
+      dispatch(deleteProductsRequest(id))
+    }
+    closeModal()
+  }
+
   return (
     <Modal
       isOpen={modalIsOpen}
@@ -86,6 +95,9 @@ export function ModalUpdateProduct({
             Salvar Edição
           </S.ButtonModalAdd>
         </S.AlignButtonModal>
+        <S.ButtonModalDelete type="button" onClick={handleDeleteItem}>
+          Excluir item
+        </S.ButtonModalDelete>
       </S.FormModal>
     </Modal>
   )

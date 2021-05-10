@@ -15,19 +15,12 @@ type UpdateProduct = ReturnType<typeof updateProductsRequest>
 function* UpdateProductSaga({ payload }: UpdateProduct) {
   const { updateProduct } = payload
   const { id, name, price } = updateProduct
-  console.log(
-    '🚀 ~ file: sagas.ts ~ line 17 ~ function*UpdateProductSaga ~ updateProduct',
-    updateProduct
-  )
+
   try {
     const response: AxiosResponse<IUpdateProduct> = yield call(
       api.put,
       `products/${id}`,
       { name, price }
-    )
-    console.log(
-      '🚀 ~ file: sagas.ts ~ line 20 ~ function*UpdateProductSaga ~ response',
-      response
     )
 
     if (response.status === 200) {

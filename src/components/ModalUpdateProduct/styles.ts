@@ -30,6 +30,13 @@ export const ButtonModalAdd = styled.button`
 export const ButtonModalCancel = styled.button`
   height: 60px;
   width: 200px;
+  font-size: 2rem;
+`
+
+export const ButtonModalDelete = styled.button`
+  height: 60px;
+  width: 100%;
   background-color: #bc3e3e;
   font-size: 2rem;
+  margin-top: 20px;
 `
