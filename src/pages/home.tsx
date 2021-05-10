@@ -80,8 +80,10 @@ export const Home: React.FC = () => {
   const listProductsElements = useMemo(() => {
     return list.map((item) => (
       <S.Product key={item.id}>
-        <Button onClick={() => handleItemUpdate(item)}>{item.name}</Button>
-        <Button>{formatPrice(Number(item.price))}</Button>
+        <Button onClick={() => handleItemUpdate(item)} title="Editar">
+          {item.name}
+        </Button>
+        <S.Price>{formatPrice(Number(item.price))}</S.Price>
         <Button onClick={() => handleAddToCart(item)}>+ Buy</Button>
         <Button onClick={() => handleRemoveToCart(item)}>- Remove</Button>
       </S.Product>

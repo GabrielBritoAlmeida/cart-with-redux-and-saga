@@ -50,3 +50,14 @@ export const ProductCart = styled.div`
   justify-content: space-between;
   margin-top: 16px;
 `
+export const Price = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 100%;
+  font-size: 2.2rem;
+  color: #333;
+  border: 1px solid #333;
+  text-transform: uppercase;
+`
