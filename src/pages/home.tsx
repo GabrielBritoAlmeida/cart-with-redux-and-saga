@@ -83,7 +83,7 @@ export const Home: React.FC = () => {
         <Button onClick={() => handleItemUpdate(item)} title="Editar">
           {item.name}
         </Button>
-        <S.Price>{formatPrice(Number(item.price))}</S.Price>
+        <S.Text>{formatPrice(Number(item.price))}</S.Text>
         <Button onClick={() => handleAddToCart(item)}>+ Buy</Button>
         <Button onClick={() => handleRemoveToCart(item)}>- Remove</Button>
       </S.Product>
@@ -108,9 +108,9 @@ export const Home: React.FC = () => {
         <Button onClick={() => setOpenModalNewProduct(true)}>
           Adicionar novo produto
         </Button>
-        <Button style={{ marginLeft: 16 }}>
+        <S.Text style={{ marginLeft: 16 }}>
           Valor total: {handleCalcTotalPrice}
-        </Button>
+        </S.Text>
       </S.Footer>
       <ModalNewProduct
         modalIsOpen={openModalNewProduct}

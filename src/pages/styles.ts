@@ -50,7 +50,7 @@ export const ProductCart = styled.div`
   justify-content: space-between;
   margin-top: 16px;
 `
-export const Price = styled.div`
+export const Text = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
