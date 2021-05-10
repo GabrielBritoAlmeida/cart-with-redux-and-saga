@@ -9,12 +9,9 @@ export function updateProductsRequest(updateProduct: IUpdateProduct) {
   }
 }
 
-export function updateProductsSuccess(updateProduct: IUpdateProduct) {
+export function updateProductsSuccess() {
   return {
-    type: ActionTypes.updateProductsSuccess,
-    payload: {
-      updateProduct
-    }
+    type: ActionTypes.updateProductsSuccess
   }
 }
 

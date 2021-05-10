@@ -18,7 +18,7 @@ export function addProductToCartSuccess(product: IProduct) {
   }
 }
 
-export function addProductToCartFailure(productId: number) {
+export function addProductToCartFailure(productId: string) {
   return {
     type: ActionTypes.addProductToCartFailure,
     payload: {
@@ -45,7 +45,7 @@ export function removeProductToCartSuccess(product: IProduct) {
   }
 }
 
-export function removeProductToCartFailure(productId: number) {
+export function removeProductToCartFailure(productId: string) {
   return {
     type: ActionTypes.removeProductToCartFailure,
     payload: {
@@ -54,7 +54,7 @@ export function removeProductToCartFailure(productId: number) {
   }
 }
 
-export function deleteProductCartRequest(id: number) {
+export function deleteProductCartRequest(id: string) {
   return {
     type: ActionTypes.deleteProductCartRequest,
     payload: {
@@ -63,7 +63,7 @@ export function deleteProductCartRequest(id: number) {
   }
 }
 
-export function deleteProductCartSuccess(id: number) {
+export function deleteProductCartSuccess(id: string) {
   return {
     type: ActionTypes.deleteProductCartSuccess,
     payload: {

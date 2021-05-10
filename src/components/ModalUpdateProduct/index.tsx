@@ -1,12 +1,13 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Modal from 'react-modal'
 import { useDispatch } from 'react-redux'
-import { newProductsRequest } from 'store/modules/new_product/action'
-import { INewProduct } from 'store/modules/new_product/types'
+import { updateProductsRequest } from 'store/modules/update_product/action'
+import { IUpdateProduct } from 'store/modules/update_product/types'
 
 type ModalNewProductProps = {
   modalIsOpen: boolean
   closeModal: () => void
+  product?: IUpdateProduct
 }
 
 const customStyles = {
@@ -22,25 +23,33 @@ const customStyles = {
 
 import * as S from './styles'
 
-export function ModalNewProduct({
+export function ModalUpdateProduct({
   modalIsOpen,
-  closeModal
+  closeModal,
+  product
 }: ModalNewProductProps) {
   const [nameProduct, setNameProduct] = useState('')
   const [priceProduct, setPriceProduct] = useState('')
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    setNameProduct(product?.name ?? '')
+    setPriceProduct(product?.price ?? '')
+  }, [product])
 
   function handleSubmit() {
     if (!nameProduct || !priceProduct) {
       return alert('Verifiquei os campos nome e valor do produto!')
     }
 
-    const newObj: INewProduct = {
-      name: nameProduct,
-      price: priceProduct
+    if (product?.id) {
+      const obj = {
+        id: product?.id ?? '',
+        name: nameProduct,
+        price: priceProduct
+      }
+      dispatch(updateProductsRequest(obj))
     }
-
-    dispatch(newProductsRequest(newObj))
     closeModal()
   }
 
@@ -52,7 +61,7 @@ export function ModalNewProduct({
       contentLabel="Example Modal"
     >
       <S.FormModal>
-        <S.TitleModal>Adicionar novo produto</S.TitleModal>
+        <S.TitleModal>Editar produto</S.TitleModal>
         <S.InputModal
           required
           type="text"
@@ -74,7 +83,7 @@ export function ModalNewProduct({
             Cancelar
           </S.ButtonModalCancel>
           <S.ButtonModalAdd type="button" onClick={handleSubmit}>
-            Adicionar Produto
+            Salvar Edição
           </S.ButtonModalAdd>
         </S.AlignButtonModal>
       </S.FormModal>

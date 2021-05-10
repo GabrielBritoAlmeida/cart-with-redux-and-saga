@@ -13,9 +13,9 @@ export enum ActionTypes {
 }
 
 export interface IProduct {
-  id: number
+  id: string
   name: string
-  price: number
+  price: string
 }
 
 export interface ICartItem {

@@ -7,9 +7,9 @@ export enum ActionTypes {
 }
 
 export type IProduct = {
-  id: number
+  id: string
   name: string
-  price: number
+  price: string
 }
 
 export type IListProductsState = {

@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { listProductsRequest } from 'store/modules/list_products/action'
 import { IProduct } from 'store/modules/list_products/types'
+import { IUpdateProduct } from 'store/modules/update_product/types'
 import { ICartItem } from 'store/modules/cart/types'
 import {
   addProductToCartRequest,
@@ -11,12 +12,15 @@ import {
 } from 'store/modules/cart/action'
 import { IState } from 'store'
 import { ModalNewProduct } from 'components/ModalNewProduct'
+import { ModalUpdateProduct } from 'components/ModalUpdateProduct'
 import { formatPrice } from 'util/format'
 
 import * as S from './styles'
 
 export const Home: React.FC = () => {
-  const [open, setOpen] = useState(false)
+  const [openModalNewProduct, setOpenModalNewProduct] = useState(false)
+  const [openModalUpdateProduct, setOpenModalUpdateProduct] = useState(false)
+  const [product, setProduct] = useState<IUpdateProduct>()
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -42,7 +46,7 @@ export const Home: React.FC = () => {
   )
 
   const handleDeleteFromCart = useCallback(
-    (id: number) => {
+    (id: string) => {
       dispatch(deleteProductCartRequest(id))
     },
     [dispatch]
@@ -52,9 +56,16 @@ export const Home: React.FC = () => {
 
   const handleCalcTotalPrice = formatPrice(
     cartList.reduce((sumTotal, item) => {
-      return sumTotal + item.product.price * item.quantity
+      return sumTotal + Number(item.product.price) * item.quantity
     }, 0)
   )
+
+  function handleItemUpdate(item: IProduct) {
+    const { id, name, price } = item
+    const newObjType: IUpdateProduct = { id, name, price }
+    setProduct(newObjType)
+    setOpenModalUpdateProduct(true)
+  }
 
   const lisCartElements = useMemo(() => {
     return cartList.map((item) => (
@@ -69,8 +80,8 @@ export const Home: React.FC = () => {
   const listProductsElements = useMemo(() => {
     return list.map((item) => (
       <S.Product key={item.id}>
-        <Button>{item.name}</Button>
-        <Button>{formatPrice(item.price)}</Button>
+        <Button onClick={() => handleItemUpdate(item)}>{item.name}</Button>
+        <Button>{formatPrice(Number(item.price))}</Button>
         <Button onClick={() => handleAddToCart(item)}>+ Buy</Button>
         <Button onClick={() => handleRemoveToCart(item)}>- Remove</Button>
       </S.Product>
@@ -92,12 +103,23 @@ export const Home: React.FC = () => {
       </S.Container>
 
       <S.Footer>
-        <Button onClick={() => setOpen(true)}>Adicionar novo produto</Button>
+        <Button onClick={() => setOpenModalNewProduct(true)}>
+          Adicionar novo produto
+        </Button>
         <Button style={{ marginLeft: 16 }}>
           Valor total: {handleCalcTotalPrice}
         </Button>
       </S.Footer>
-      <ModalNewProduct modalIsOpen={open} closeModal={() => setOpen(false)} />
+      <ModalNewProduct
+        modalIsOpen={openModalNewProduct}
+        closeModal={() => setOpenModalNewProduct(false)}
+      />
+
+      <ModalUpdateProduct
+        product={product}
+        modalIsOpen={openModalUpdateProduct}
+        closeModal={() => setOpenModalUpdateProduct(false)}
+      />
     </S.Wrapper>
   )
 }

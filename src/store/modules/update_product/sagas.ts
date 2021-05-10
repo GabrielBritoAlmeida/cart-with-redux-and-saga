@@ -10,21 +10,29 @@ import { AxiosResponse } from 'axios'
 import { ActionTypes, IUpdateProduct } from './types'
 import { listProductsRequest } from '../list_products/action'
 
-type NewProduct = ReturnType<typeof updateProductsRequest>
+type UpdateProduct = ReturnType<typeof updateProductsRequest>
 
-function* UpdateProductSaga({ payload }: NewProduct) {
+function* UpdateProductSaga({ payload }: UpdateProduct) {
   const { updateProduct } = payload
   const { id, name, price } = updateProduct
+  console.log(
+    '🚀 ~ file: sagas.ts ~ line 17 ~ function*UpdateProductSaga ~ updateProduct',
+    updateProduct
+  )
   try {
     const response: AxiosResponse<IUpdateProduct> = yield call(
-      api.post,
-      'products',
-      { id, name, price }
+      api.put,
+      `products/${id}`,
+      { name, price }
+    )
+    console.log(
+      '🚀 ~ file: sagas.ts ~ line 20 ~ function*UpdateProductSaga ~ response',
+      response
     )
 
     if (response.status === 200) {
       yield put(listProductsRequest())
-      yield put(updateProductsSuccess(updateProduct))
+      yield put(updateProductsSuccess())
     }
   } catch (error) {
     yield updateProductsFailure()
@@ -32,5 +40,5 @@ function* UpdateProductSaga({ payload }: NewProduct) {
 }
 
 export default all([
-  takeLatest(ActionTypes.updateProductsSuccess, UpdateProductSaga)
+  takeLatest(ActionTypes.updateProductsRequest, UpdateProductSaga)
 ])
