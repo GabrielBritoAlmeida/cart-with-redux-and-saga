@@ -4,6 +4,10 @@ Projeto
 
 > Projeto iniciado com Create-react-app.
 
+### Deploy na Vercel: 
+
+[Acessar projeto <-](https://vianuvem-teste.vercel.app/)
+
 ### Principais Tecnologias:
 
 - Typescript
@@ -23,9 +27,5 @@ yarn ou npm install -  para baixar a dependências.
 ```
 
 ```tsx
-yarn start - inicia o projeto
+yarn start - iniciar o projeto
 ```
-
-### Deploy na Vercel: 
-
-[Link do Projeto:](https://vianuvem-teste.vercel.app/)
