@@ -41,13 +41,19 @@ export function ModalNewProduct({
     }
 
     dispatch(newProductsRequest(newObj))
+    handleCloseModalClearInputs()
+  }
+
+  function handleCloseModalClearInputs() {
     closeModal()
+    setNameProduct('')
+    setPriceProduct('')
   }
 
   return (
     <Modal
       isOpen={modalIsOpen}
-      onRequestClose={closeModal}
+      onRequestClose={handleCloseModalClearInputs}
       style={customStyles}
       contentLabel="Example Modal"
     >
