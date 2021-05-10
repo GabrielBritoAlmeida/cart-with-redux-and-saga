@@ -70,8 +70,8 @@ export const Home: React.FC = () => {
   const lisCartElements = useMemo(() => {
     return cartList.map((item) => (
       <S.ProductCart key={item.product.id}>
-        <Button>{item.product.name}</Button>
-        <Button>{item.quantity}</Button>
+        <S.Text>{item.product.name}</S.Text>
+        <S.Text>{item.quantity}</S.Text>
         <Button onClick={() => handleDeleteFromCart(item.product.id)}>x</Button>
       </S.ProductCart>
     ))
