@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import Modal from 'react-modal'
 import { useDispatch } from 'react-redux'
-import { updateProductsRequest } from 'store/modules/update_product/action'
-import { deleteProductsRequest } from 'store/modules/delete_product/action'
-import { IUpdateProduct } from 'store/modules/update_product/types'
+import { updateProductsRequest } from 'store/modules/product/update_product/action'
+import { deleteProductsRequest } from 'store/modules/product/delete_product/action'
+import { IUpdateProduct } from 'store/modules/product/update_product/types'
 
 type ModalNewProductProps = {
   modalIsOpen: boolean

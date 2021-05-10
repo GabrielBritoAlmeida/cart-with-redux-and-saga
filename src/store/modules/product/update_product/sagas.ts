@@ -9,7 +9,7 @@ import { api } from 'services/api'
 import { AxiosResponse } from 'axios'
 import { ActionTypes, IUpdateProduct } from './types'
 import { listProductsRequest } from '../list_products/action'
-import { updateProductToCartSuccess } from '../cart/action'
+import { updateProductToCartSuccess } from '../../cart/action'
 
 type UpdateProduct = ReturnType<typeof updateProductsRequest>
 

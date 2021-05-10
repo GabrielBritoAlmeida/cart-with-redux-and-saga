@@ -1,9 +1,9 @@
 import { Button } from 'components/Button'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { listProductsRequest } from 'store/modules/list_products/action'
-import { IProduct } from 'store/modules/list_products/types'
-import { IUpdateProduct } from 'store/modules/update_product/types'
+import { listProductsRequest } from 'store/modules/product/list_products/action'
+import { IProduct } from 'store/modules/product/list_products/types'
+import { IUpdateProduct } from 'store/modules/product/update_product/types'
 import { ICartItem } from 'store/modules/cart/types'
 import {
   addProductToCartRequest,

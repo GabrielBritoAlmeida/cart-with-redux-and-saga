@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import Modal from 'react-modal'
 import { useDispatch } from 'react-redux'
-import { newProductsRequest } from 'store/modules/new_product/action'
-import { INewProduct } from 'store/modules/new_product/types'
+import { newProductsRequest } from 'store/modules/product/new_product/action'
+import { INewProduct } from 'store/modules/product/new_product/types'
 
 type ModalNewProductProps = {
   modalIsOpen: boolean

@@ -9,7 +9,7 @@ import { api } from 'services/api'
 import { AxiosResponse } from 'axios'
 import { ActionTypes, IDeleteProduct } from './types'
 import { listProductsRequest } from '../list_products/action'
-import { deleteProductCartRequest } from '../cart/action'
+import { deleteProductCartRequest } from '../../cart/action'
 
 type UpdateProduct = ReturnType<typeof deleteProductsRequest>
 
