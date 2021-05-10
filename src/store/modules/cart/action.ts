@@ -77,3 +77,12 @@ export function deleteProductCartFailure() {
     type: ActionTypes.deleteProductCartFailure
   }
 }
+
+export function updateProductToCartSuccess(product: IProduct) {
+  return {
+    type: ActionTypes.updateProductCartSuccess,
+    payload: {
+      product
+    }
+  }
+}

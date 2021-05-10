@@ -68,6 +68,21 @@ const Cart: Reducer<ICartState> = (state = INITIAL_STATE, action) => {
         break
       }
 
+      case ActionTypes.updateProductCartSuccess: {
+        const { product } = action.payload
+
+        const productInCartIndex = draft.items.findIndex(
+          (item) => item.product.id === product.id
+        )
+
+        if (draft.items[productInCartIndex]) {
+          draft.items[productInCartIndex].product.name = product.name
+          draft.items[productInCartIndex].product.price = product.price
+        }
+
+        break
+      }
+
       default: {
         return state
       }

@@ -45,7 +45,6 @@ function* DeleteProductStockSaga({ payload }: DeleteProduct) {
   try {
     const { id } = payload
     yield put(deleteProductCartSuccess(id))
-    alert(`Produto deletado com sucesso!`)
   } catch (error) {
     alert(`Erro ao deletar o item!`)
   }

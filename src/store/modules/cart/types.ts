@@ -9,7 +9,9 @@ export enum ActionTypes {
 
   deleteProductCartRequest = 'DELETE_PRODUCT_TO_REQUEST',
   deleteProductCartFailure = 'DELETE_PRODUCT_TO_FAILURE',
-  deleteProductCartSuccess = 'DELETE_PRODUCT_TO_SUCCESS'
+  deleteProductCartSuccess = 'DELETE_PRODUCT_TO_SUCCESS',
+
+  updateProductCartSuccess = 'UPDATE_PRODUCT_TO_SUCCESS'
 }
 
 export interface IProduct {

@@ -9,6 +9,7 @@ import { api } from 'services/api'
 import { AxiosResponse } from 'axios'
 import { ActionTypes, IUpdateProduct } from './types'
 import { listProductsRequest } from '../list_products/action'
+import { updateProductToCartSuccess } from '../cart/action'
 
 type UpdateProduct = ReturnType<typeof updateProductsRequest>
 
@@ -25,6 +26,7 @@ function* UpdateProductSaga({ payload }: UpdateProduct) {
 
     if (response.status === 200) {
       yield put(listProductsRequest())
+      yield put(updateProductToCartSuccess(updateProduct))
       yield put(updateProductsSuccess())
     }
   } catch (error) {
