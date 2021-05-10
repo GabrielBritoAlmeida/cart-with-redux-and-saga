@@ -24,7 +24,7 @@ function* NewProductSaga({ payload }: NewProduct) {
 
     if (response.status === 201) {
       yield put(listProductsRequest())
-      yield put(newProductsSuccess(newProduct))
+      yield put(newProductsSuccess())
     }
   } catch (error) {
     yield newProductsFailure()

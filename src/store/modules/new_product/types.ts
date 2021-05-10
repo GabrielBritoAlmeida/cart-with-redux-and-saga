@@ -10,7 +10,7 @@ export type INewProduct = {
 }
 
 export type INewProductsState = {
-  item: INewProduct | null
+  success: boolean
   failure: boolean
   loading: boolean
 }

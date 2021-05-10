@@ -3,7 +3,7 @@ import produce from 'immer'
 import { ActionTypes, INewProductsState } from './types'
 
 const INITIAL_STATE: INewProductsState = {
-  item: null,
+  success: false,
   failure: false,
   loading: false
 }
@@ -17,8 +17,7 @@ const Cart: Reducer<INewProductsState> = (state = INITIAL_STATE, action) => {
       }
 
       case ActionTypes.newProductsSuccess: {
-        const { newProduct } = action.payload
-        draft.item = newProduct
+        draft.success = true
         draft.loading = false
         break
       }

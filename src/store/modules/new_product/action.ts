@@ -9,12 +9,9 @@ export function newProductsRequest(newProduct: INewProduct) {
   }
 }
 
-export function newProductsSuccess(newProduct: INewProduct) {
+export function newProductsSuccess() {
   return {
-    type: ActionTypes.newProductsSuccess,
-    payload: {
-      newProduct
-    }
+    type: ActionTypes.newProductsSuccess
   }
 }
 
