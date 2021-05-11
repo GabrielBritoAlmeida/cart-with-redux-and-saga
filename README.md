@@ -8,6 +8,11 @@ Projeto
 
 [Acessar projeto <-](https://vianuvem-teste.vercel.app/)
 
+### Mesmo projeto sendo desenvolvido em paralelo, usando "Context" 
+
+[Link do projeto com Context](https://github.com/GabrielBritoAlmeida/cart-with-context_api)
+
+
 ### Principais Tecnologias:
 
 - Typescript
