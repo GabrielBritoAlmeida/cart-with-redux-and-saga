@@ -9,12 +9,6 @@ Projeto que simula um carrinho de compras, usando "Redux e Saga" do React.
 
 [Acessar projeto <-](https://vianuvem-teste.vercel.app/)
 
-### Mesmo projeto usando "Context" do React
-
-[Link do projeto na Vercel](https://cart-with-context-api.vercel.app/)
-
-[Link do projeto com Context](https://github.com/GabrielBritoAlmeida/cart-with-context_api)
-
 
 ### Principais Tecnologias:
 
